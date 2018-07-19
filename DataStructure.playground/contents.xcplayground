@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='ios'>
     <pages>
-        <page name='LinkedList'/>
-        <page name='SingleLinkList'/>
-        <page name='Stack'/>
-        <page name='有序链表的合并'/>
+        <page name='4 Stack'/>
+        <page name='3 有序链表的合并'/>
+        <page name='5 队列'/>
+        <page name='1 LinkedList'/>
+        <page name='2 SingleLinkList'/>
+        <page name='6 矩阵'/>
     </pages>
 </playground>

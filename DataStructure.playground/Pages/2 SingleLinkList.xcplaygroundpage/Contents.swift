@@ -144,8 +144,19 @@ public final class SingleLinkList<T> {
     public func removeAll() {
         head = nil
     }
-    
-    
+
+    func reverseList(_ head: Node?) -> Node? {
+        var head = head
+        var next: Node? = head?.next
+        var pre: Node? = nil
+        while head != nil {
+            head!.next = pre
+            pre = head
+            head = next
+            next = head?.next
+        }
+        return pre
+    }
 }
 
 extension SingleLinkList:CustomStringConvertible {
@@ -161,6 +172,19 @@ extension SingleLinkList:CustomStringConvertible {
         }
         return s + "]"
     }
+    
+   public func solveHanoi(
+        count: Int,
+        from: String, to: String, other: String,
+        move: (String, String) -> ()){
+        if count > 0 {
+            solveHanoi(count: count - 1, from: from, to: other, other: to, move: move)
+            move(from, to)
+            solveHanoi(count: count - 1, from: other, to: to, other: from, move: move)
+        }
+    }
+    
+    
 }
 
 
@@ -175,6 +199,8 @@ let link = SingleLinkList<String>()
     link.removeNode(atIndex: 1)
     print(link)
     print(link.count)
-    link.removeAll()
+//    link.removeAll()
     print(link)
 
+    print(link.head?.value)
+    print(link.reverseList(link.head)?.value)
