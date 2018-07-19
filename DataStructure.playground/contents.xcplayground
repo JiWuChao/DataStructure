@@ -7,5 +7,8 @@
         <page name='1 LinkedList'/>
         <page name='2 SingleLinkList'/>
         <page name='6 矩阵'/>
+        <page name='7十进制转成八进制'/>
+        <page name='8 树'/>
+        <page name='9 二叉树'/>
     </pages>
 </playground>
