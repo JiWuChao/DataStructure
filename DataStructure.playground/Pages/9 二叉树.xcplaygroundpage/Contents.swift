@@ -16,5 +16,21 @@ public indirect enum BinaryTree<T> {
             return 0
         }
     }
-    
 }
+
+extension BinaryTree: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case let .node(left, value, right):
+            return "value: \(value), left = [\(left.description)], right = [\(right.description)]"
+        case .empty:
+            return ""
+        }
+    }
+}
+
+
+
+
+
+
