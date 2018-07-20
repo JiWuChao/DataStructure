@@ -10,5 +10,6 @@
         <page name='7十进制转成八进制'/>
         <page name='8 树'/>
         <page name='9 二叉树'/>
+        <page name='二叉查找树'/>
     </pages>
 </playground>
