@@ -3,6 +3,7 @@
 import Foundation
 
 //T: Comparable 传入的value 必须是可以比较的类型
+
 public indirect enum BinaryTree<T: Comparable> {
     case empty
     case node(BinaryTree, T, BinaryTree)
@@ -72,4 +73,4 @@ var tree = BinaryTree<Int>.empty
     tree.insert(newValue: 3)
     tree.insert(newValue: 5)
 
-//    print(tree)
+    print(tree)
