@@ -2,55 +2,35 @@
 
 import Foundation
 
+/*
+                第一
+             /   /\  \ 1
+          6 /   /  \  \
+         第四   /5   \3 第二
+          \   /      \  |
+          7\ /        \ |2
+           第五 ---4--- 第三
+ */
 
 
-// MARK: 定点
-public struct Vertex<T:Hashable> {
-    var data :T
-}
+let list = AdjacencyList<String>.init()
 
-extension Vertex:Hashable {
-    
-    public var hashValue: Int {
-        return "\(data)".hashValue
-    }
-    
-    static public func == (lhs:Vertex,rhs:Vertex) -> Bool {
-        return lhs.data == rhs.data
-    }
-    
-}
+  let first =  list.createVertex(data: "第一")
+  let second =   list.createVertex(data: "第二")
+  let third =   list.createVertex(data: "第三")
+  let forth =   list.createVertex(data: "第四")
+  let fifth =   list.createVertex(data: "第五")
 
-extension Vertex: CustomStringConvertible {
-    public var description: String {
-        return "\(data)"
-    }
-}
+list.add(.undirected, from: first, to: second, weight: 1)
+list.add(.undirected, from: first, to: third, weight: 3)
+list.add(.undirected, from: first, to: forth, weight: 6)
+list.add(.undirected, from: first, to: fifth, weight: 5)
+list.add(.undirected, from: forth, to: fifth, weight: 7)
+list.add(.undirected, from: fifth, to: third, weight: 4)
+list.add(.undirected, from: second, to: third, weight: 2)
 
-// 边
-
-public enum EdgeType {
-    case directed // 有方向的
-    case undirected // 无方向的
-}
-
-public struct Edge<T:Hashable> {
-    public var source:Vertex<T> //原点
-    public var destination:Vertex<T>//目的地
-    public let weight: Double? //权重
-}
-
-extension Edge :Hashable {
-    
-    public var hashValue: Int {
-        return "\(source)\(destination)\(weight)".hashValue
-    }
-    
-    static public func == (lhs:Edge<T>,rhs:Edge<T>) -> Bool {
-        return lhs.source == rhs.source && lhs.destination == rhs.destination && lhs.weight == rhs.weight
-    }
-
-}
-
+print(list.description)
+print(list.edges(from: third))
+print(list.weight(from: third, to: fifth) ?? 0)
 
 
