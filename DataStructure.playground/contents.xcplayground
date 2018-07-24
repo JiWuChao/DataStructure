@@ -11,6 +11,8 @@
         <page name='8 树'/>
         <page name='9 二叉树'/>
         <page name='10二叉排序树'/>
-        <page name='11二叉排序树'/>
+        <page name='11线索二叉树'/>
+        <page name='12 图'/>
+        <page name='13广度优先比遍历图'/>
     </pages>
 </playground>
