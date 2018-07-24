@@ -1,3 +1,4 @@
+
 public struct LinkedList<T>: CustomStringConvertible {
 	private var head: Node<T>?
 	private var tail: Node<T>?

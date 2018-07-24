@@ -1,6 +1,6 @@
 
 
-public struct Queue<T> {
+public struct GraphaQueue<T> {
 
 	fileprivate var list = LinkedList<T>()
 
@@ -27,7 +27,7 @@ public struct Queue<T> {
 	}
 }
 
-extension Queue: CustomStringConvertible {
+extension GraphaQueue: CustomStringConvertible {
 	public var description: String {
 		return list.description
 	}
