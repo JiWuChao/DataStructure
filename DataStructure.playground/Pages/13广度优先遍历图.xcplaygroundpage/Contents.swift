@@ -36,3 +36,10 @@ if let edges = list.breadthFirstSearch(from: second, to: forth) {
         print("\(edge.source) -> \(edge.destination)")
     }
 }
+
+if let ed = list.breadthFirstSearch(from: fifth, to: second) {
+    for edge in ed {
+        print("\(edge.source) -> \(edge.destination)")
+    }
+}
+
