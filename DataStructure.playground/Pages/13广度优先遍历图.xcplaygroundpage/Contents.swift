@@ -31,15 +31,17 @@ list.add(.undirected, from: forth, to: fifth, weight: 7)
 list.add(.undirected, from: fifth, to: third, weight: 4)
 list.add(.undirected, from: second, to: third, weight: 2)
 
-if let edges = list.breadthFirstSearch(from: second, to: forth) {
-    for edge in edges {
-        print("\(edge.source) -> \(edge.destination)")
-    }
-}
+//if let edges = list.breadthFirstSearch(from: second, to: forth) {
+//    for edge in edges {
+//        print("\(edge.source) -> \(edge.destination)")
+//    }
+//}
+//
+//if let ed = list.breadthFirstSearch(from: fifth, to: second) {
+//    for edge in ed {
+//        print("\(edge.source) -> \(edge.destination)")
+//    }
+//}
 
-if let ed = list.breadthFirstSearch(from: fifth, to: second) {
-    for edge in ed {
-        print("\(edge.source) -> \(edge.destination)")
-    }
-}
+print(list.depthFirstSearch(from: second, to: fifth, graph: list))
 

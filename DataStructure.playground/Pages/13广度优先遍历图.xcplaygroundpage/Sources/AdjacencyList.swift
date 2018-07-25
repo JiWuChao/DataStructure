@@ -15,9 +15,9 @@ open class AdjacencyList<T: Hashable> {
         addDirectedEdge(from: source, to: destination, weight: weight)
         addDirectedEdge(from: destination, to: source, weight: weight)
       }
-    }
+}
 
-    extension AdjacencyList: Graphable {
+extension AdjacencyList: Graphable {
       
       public typealias Element = T
       
@@ -114,5 +114,35 @@ open class AdjacencyList<T: Hashable> {
                 }
                 return nil
     }
+    
+    
+  public  func depthFirstSearch(from start: Vertex<String>, to end: Vertex<String>, graph: AdjacencyList<String>) -> Stack<Vertex<String>> { // 1
+        var visited = Set<Vertex<String>>() // 2存储已经访问过的顶点
+        var stack = Stack<Vertex<String>>() // 3创建一个堆栈来存储从起点到终点的潜在路径。
+        stack.push(start)//把开始的顶点压入栈
+        visited.insert(start)//并且插入已经访问的 set 中
+        outer: while let vertex = stack.top, vertex != end { // 1
+            
+            guard let neighbors = graph.edges(from: vertex), neighbors.count > 0 else { // 2
+                print("backtrack from \(vertex)")
+              _ = stack.pop()
+                continue
+            }
+            
+            for edge in neighbors { // 3
+                if !visited.contains(edge.destination) {
+                    visited.insert(edge.destination)
+                    stack.push(edge.destination)
+                    print(stack.description)
+                    continue outer
+                }
+            }
+            
+            print("backtrack from \(vertex)") // 4
+           _ = stack.pop()
+        }
+        return stack // 4
+    }
+    
 }
 
