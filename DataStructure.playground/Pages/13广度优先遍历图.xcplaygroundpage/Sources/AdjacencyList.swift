@@ -80,13 +80,26 @@ open class AdjacencyList<T: Hashable> {
             -> [Edge<Element>]? {
                 var queue = GraphaQueue<Vertex<Element>>()
                 queue.enqueue(source) // 1先把源点加入队列
+                 var visits : [Vertex<Element> : Visit<Element>] = [source: .source] // 1 //  已经访问过的定点
                 while let visitedVertex = queue.dequeue() { // 2遍历取出然后取出出队的元素
                     if visitedVertex == destination { // 3如果源点和终点相同
-                        return []// 返回空
+                        var vertex = destination // 1
+                        var route: [Edge<Element>] = [] // 2
+                        
+                        while let visit = visits[vertex],
+                            case .edge(let edge) = visit { // 3
+                                route = [edge] + route
+                                vertex = edge.source // 4
+                                
+                        }
+                        return route // 5
                     }
-                    let neighbourEdges = edges(from: visitedVertex) ?? [] // 1
+                    let neighbourEdges = edges(from: visitedVertex) ?? [] // 1 把源点的的邻接点
                     for edge in neighbourEdges {
-                        queue.enqueue(edge.destination)
+                        if visits[edge.destination] == nil { // 2
+                            queue.enqueue(edge.destination)
+                            visits[edge.destination] = .edge(edge) // 3
+                        }
                     } // 2
                     
         }
