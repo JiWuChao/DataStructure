@@ -88,13 +88,20 @@ extension AdjacencyList: Graphable {
             -> [Edge<Element>]? {
                 var queue = GraphaQueue<Vertex<Element>>()
                     queue.enqueue(source) // 1先把源点加入队列
-                    print("\(source.data)" + "hahha")
-                 var visits : [Vertex<Element> : Visit<Element>] = [source: .source] //  记录已经访问过的顶点
+                /*
+                    用字典 记录已经访问过的顶点用于记录访问的路径
+                    键:顶点
+                    值:一个枚举值
+                         enum Visit<Element: Hashable> {
+                            case source 原点
+                            case edge(Edge<Element>) 边
+                         }
+                 */
+                 var visits : [Vertex<Element> : Visit<Element>] = [source: .source]
                 while let visitedVertex = queue.dequeue() { // 2遍历取出然后取出出队的元素
-//                    print("\(visitedVertex.data)" + "shu")
                     if visitedVertex == destination { // 3如果源点和终点相同
                         var vertex = destination //
-                        var route: [Edge<Element>] = []//路径
+                        var route: [Edge<Element>] = []// 访问的路径
                         
                         while let visit = visits[vertex],
                             case .edge(let edge) = visit {
@@ -104,13 +111,22 @@ extension AdjacencyList: Graphable {
                         }
                         return route
                     }
-                    let neighbourEdges = edges(from: visitedVertex) ?? [] // 把源点的的邻接点
-                    for edge in neighbourEdges {
-                        if visits[edge.destination] == nil {
-                            queue.enqueue(edge.destination)
-                            visits[edge.destination] = .edge(edge)
+                    /*
+                     1 取出跟原点相关的所有边
+                     2 遍历跟原点相关的所有边 --> 找到边的终点
+                     3 判断：如果边的终点没有被访问过：即邻接点还没有被访问过
+                     4 把此邻接点加入队列
+                     5 把邻接点标记为已访问
+                     */
+                    let neighbourEdges = edges(from: visitedVertex) ?? [] // 1
+                    for edge in neighbourEdges {//2
+                        if visits[edge.destination] == nil {//3
+                            queue.enqueue(edge.destination)//4
+                            visits[edge.destination] = .edge(edge)//5
                         }
+                        print("\(edge.destination)")
                     }
+                    print("---end---\n")
                 }
                 return nil
     }
