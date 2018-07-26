@@ -132,33 +132,38 @@ extension AdjacencyList: Graphable {
     }
     
     
-  public  func depthFirstSearch(from start: Vertex<String>, to end: Vertex<String>, graph: AdjacencyList<String>) -> Stack<Vertex<String>> { // 1
-        var visited = Set<Vertex<String>>() // 2存储已经访问过的顶点
-        var stack = Stack<Vertex<String>>() // 3创建一个堆栈来存储从起点到终点的潜在路径。
-        stack.push(start)//把开始的顶点压入栈
-        visited.insert(start)//并且插入已经访问的 set 中
-        outer: while let vertex = stack.top, vertex != end { // 1
-            
-            guard let neighbors = graph.edges(from: vertex), neighbors.count > 0 else { // 2
-                print("backtrack from \(vertex)")
-              _ = stack.pop()
-                continue
-            }
-            
-            for edge in neighbors { // 3
-                if !visited.contains(edge.destination) {
-                    visited.insert(edge.destination)
-                    stack.push(edge.destination)
-                    print(stack.description)
-                    continue outer
+
+    public func depthFirstSearch(from source: Vertex<Element>, to destination: Vertex<Element>)
+        -> [Edge<Element>]?  {
+            // 之所以用队列的原因就是 深度优先算法需要回退
+            var stack = Stack<Vertex<Element>>() // 创建一个堆栈来存储从起点到终点的潜在路径。
+                stack.push(source)//把开始的顶点压入栈
+             var visits : [Vertex<Element> : Visit<Element>] = [source: .source]//存储已经访问过的顶点
+             while let vertex = stack.pop()  {
+                if vertex == destination { // 如果源点和终点相同
+                    var vertex = destination //
+                    var route: [Edge<Element>] = []// 访问的路径
+                    while let visit = visits[vertex],
+                        case .edge(let edge) = visit {
+                            route = [edge] + route
+                            vertex = edge.source
+                    }
+                    return route
+                }
+                
+                guard let neighbors = self.edges(from: vertex), neighbors.count > 0 else {
+                    _ = stack.pop()
+                    continue
+                }
+                
+                for edge in neighbors {
+                    if visits[edge.destination] == nil {
+                        stack.push(edge.destination)
+                        visits[edge.destination] = .edge(edge)
+                    }
                 }
             }
-            
-            print("backtrack from \(vertex)") // 4
-           _ = stack.pop()
-        }
-        return stack // 4
+            return nil
     }
-    
 }
 
