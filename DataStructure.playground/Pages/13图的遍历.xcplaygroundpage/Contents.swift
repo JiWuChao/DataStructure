@@ -31,12 +31,7 @@ list.add(.undirected, from: forth, to: fifth, weight: 7)
 list.add(.undirected, from: fifth, to: third, weight: 4)
 list.add(.undirected, from: second, to: third, weight: 2)
 
-//if let edges = list.breadthFirstSearch(from: second, to: forth) {
-//    for edge in edges {
-//        print("\(edge.source) -> \(edge.destination)")
-//    }
-//}
-//
+
 if let ed = list.depthFirstSearch(from: fifth, to: second) {
     print("深度优先")
     for edge in ed {
@@ -50,10 +45,4 @@ if let ed = list.breadthFirstSearch(from: fifth, to: second) {
         print("\(edge.source) -> \(edge.destination)")
     }
 }
-
-
-//    print(list.depthFirstSearch(from: second, to: forth)?.description)
-
-
-//print(list.depthFirstSearch(from: second, to: fifth, graph: list))
 
