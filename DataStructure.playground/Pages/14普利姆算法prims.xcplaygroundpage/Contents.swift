@@ -18,7 +18,7 @@ class Prim<T:Hashable> {
     /// - Returns: <#return value description#>
     func createMinimumSpanningTree(graph:Graph) -> (cost:Double,mst:Graph) {
         var cost = 0.0
-        var mst = Graph()
+        let mst = Graph()
         var visited = Set<Vertex<T>>()
         
         guard let start = graph.getAllVertices().first else{
@@ -37,8 +37,9 @@ class Prim<T:Hashable> {
             cost += head.weight
             if let prev = head.parent { // 5
                 print(prev.description)
-                mst.add(.undirected, from: prev, to: vertex, weight: head.weight)
-                
+                let pre = mst.createVertex(data: prev.data)
+                let ver = mst.createVertex(data: vertex.data)
+                mst.add(.undirected, from: pre, to: ver, weight: head.weight)
             }
             
             if let neighbours = graph.edges(from: vertex) {
@@ -65,21 +66,21 @@ class Prim<T:Hashable> {
  
  */
 
-//let list = AdjacencyList<String>.init()
-//
-//let first =  list.createVertex(data: "第一")
-//let second =   list.createVertex(data: "第二")
-//let third =   list.createVertex(data: "第三")
-//let forth =   list.createVertex(data: "第四")
-//let fifth =   list.createVertex(data: "第五")
-//
-//list.add(.undirected, from: first, to: second, weight: 1)
-//list.add(.undirected, from: first, to: third, weight: 3)
-//list.add(.undirected, from: first, to: forth, weight: 6)
-//list.add(.undirected, from: first, to: fifth, weight: 5)
-//list.add(.undirected, from: forth, to: fifth, weight: 7)
-//list.add(.undirected, from: fifth, to: third, weight: 4)
-//list.add(.undirected, from: second, to: third, weight: 2)
+let list = AdjacencyList<String>.init()
+
+let first =  list.createVertex(data: "第一")
+let second =   list.createVertex(data: "第二")
+let third =   list.createVertex(data: "第三")
+let forth =   list.createVertex(data: "第四")
+let fifth =   list.createVertex(data: "第五")
+
+list.add(.undirected, from: first, to: second, weight: 1)
+list.add(.undirected, from: first, to: third, weight: 3)
+list.add(.undirected, from: first, to: forth, weight: 6)
+list.add(.undirected, from: first, to: fifth, weight: 5)
+list.add(.undirected, from: forth, to: fifth, weight: 7)
+list.add(.undirected, from: fifth, to: third, weight: 4)
+list.add(.undirected, from: second, to: third, weight: 2)
 
 
 var graph = AdjacencyList<Int>()
@@ -100,10 +101,7 @@ graph.add(.undirected, from: three, to: five, weight: 6)
 graph.add(.undirected, from: three, to: six, weight: 4)
 graph.add(.undirected, from: four, to: six, weight: 2)
 graph.add(.undirected, from: five, to: six, weight: 6)
-
-
-
-//print(list.description)
+//
 
 let prim = Prim<Int>.init()
 let (cost,mst) = prim.createMinimumSpanningTree(graph: graph)

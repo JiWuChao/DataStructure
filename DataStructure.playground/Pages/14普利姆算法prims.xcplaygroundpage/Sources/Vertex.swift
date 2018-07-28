@@ -2,7 +2,7 @@ import Foundation
 
 // MARK:  顶点
 public struct Vertex<T:Hashable> {
-    var data :T
+   public var data :T
 }
 
 extension Vertex:Hashable {
