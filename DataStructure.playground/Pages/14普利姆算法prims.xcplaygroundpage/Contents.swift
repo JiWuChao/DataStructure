@@ -36,7 +36,6 @@ class Prim<T:Hashable> {
             visited.insert(vertex)
             cost += head.weight
             if let prev = head.parent { // 5
-                print(prev.description)
                 let pre = mst.createVertex(data: prev.data)
                 let ver = mst.createVertex(data: vertex.data)
                 mst.add(.undirected, from: pre, to: ver, weight: head.weight)
@@ -83,31 +82,13 @@ list.add(.undirected, from: fifth, to: third, weight: 4)
 list.add(.undirected, from: second, to: third, weight: 2)
 
 
-var graph = AdjacencyList<Int>()
-let one = graph.createVertex(data: 1)
-let two = graph.createVertex(data: 2)
-let three = graph.createVertex(data: 3)
-let four = graph.createVertex(data: 4)
-let five = graph.createVertex(data: 5)
-let six = graph.createVertex(data: 6)
 
-graph.add(.undirected, from: one, to: two, weight: 6)
-graph.add(.undirected, from: one, to: three, weight: 1)
-graph.add(.undirected, from: one, to: four, weight: 5)
-graph.add(.undirected, from: two, to: three, weight: 5)
-graph.add(.undirected, from: two, to: five, weight: 3)
-graph.add(.undirected, from: three, to: four, weight: 5)
-graph.add(.undirected, from: three, to: five, weight: 6)
-graph.add(.undirected, from: three, to: six, weight: 4)
-graph.add(.undirected, from: four, to: six, weight: 2)
-graph.add(.undirected, from: five, to: six, weight: 6)
-//
 
-let prim = Prim<Int>.init()
-let (cost,mst) = prim.createMinimumSpanningTree(graph: graph)
+let prim = Prim<String>.init()
+let (cost,mst) = prim.createMinimumSpanningTree(graph: list)
 
-print("cost:\(cost)")
-print("mst:")
+print("权值:\(cost)")
+print("最小生成树:")
 
 print(mst.description)
 
