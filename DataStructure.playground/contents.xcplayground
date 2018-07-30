@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios'>
+<playground version='6.0' target-platform='ios' display-mode='rendered'>
     <pages>
         <page name='1 LinkedList'/>
         <page name='2 SingleLinkList'/>
@@ -16,5 +16,7 @@
         <page name='13图的遍历'/>
         <page name='堆'/>
         <page name='14普利姆算法prims'/>
+        <page name='冒泡排序'/>
+        <page name='直接插入排序'/>
     </pages>
 </playground>
