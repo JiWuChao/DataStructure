@@ -1,5 +1,5 @@
 //: [Previous](@previous)
-//:![image](#imageLiteral(resourceName: "sort.png"))
+//:![image](https://github.com/JiWuChao/DataStructure/blob/master/DataStructure.playground/Pages/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.xcplaygroundpage/Resources/sort.png?raw=true)
 import Foundation
 
 
