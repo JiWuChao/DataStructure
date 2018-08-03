@@ -34,7 +34,7 @@ print(index!)
 
 
 /*
-    折半查找
+    折半查找 数组要有序
     注意：折半查找在数组有序的时候才发挥最大作用
     1 把要数组分成两部分
     2 比较中间的值 如果要查找的key大于中间的值 则key在右边的区域反之在左边区域
@@ -59,9 +59,9 @@ func binarySearch<T: Comparable>(_ a: [T], key: T, range: Range<Int>) -> Int? {
     }
 }
 
-let arr2 = [1,2,3,4,5,6,7,8,9,10]
+let arr2 = [1,2,3,4,5,6,7,8,9,10,11,23,44,55]
 
-let index2 = binarySearch(arr2, key: 7, range: 0..<arr2.count - 1)
+let index2 = binarySearch(arr2, key: 55, range: 0..<arr2.count)
 
 print(index2!)
 
