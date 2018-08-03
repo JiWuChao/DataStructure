@@ -16,8 +16,10 @@
         <page name='13图的遍历'/>
         <page name='堆'/>
         <page name='14普利姆算法prims'/>
+        <page name='15二分查找'/>
         <page name='冒泡排序'/>
         <page name='直接插入排序'/>
         <page name='快速排序'/>
+        <page name='折半插入排序'/>
     </pages>
 </playground>
