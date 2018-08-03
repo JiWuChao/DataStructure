@@ -9,9 +9,11 @@ import Foundation
 func quicklySort<T: Comparable>(_ contents:inout [T], low: Int, high: Int) {
     var i = low
     var j = high
-    
-    let piv = (low + (high - low) / 2)
-    let lowValue = contents[piv] ////标志位
+    guard low < high,low >= 0,high < contents.count  else {
+        return
+    }
+    let piv = (low + (high - low) / 2)//标志位
+    let lowValue = contents[piv] //
     
     /*
      一个循环的流程
@@ -46,6 +48,11 @@ func quicklySort<T: Comparable>(_ contents:inout [T], low: Int, high: Int) {
         }
         if i <= j  {
            contents.swapAt(i, j)
+            print("contenti-->\(contents[i])" +  "和" +  " contentj-->\(contents[j])" + "交换")
+            /*
+                交换完成后 i 向下一步
+                j 向前一步
+             */
             i += 1
             j -= 1
         }
@@ -64,7 +71,7 @@ func quicklySort<T: Comparable>(_ contents:inout [T], low: Int, high: Int) {
 }
 
 
-var arr2 = [7,32,2,1,5,6,3,44]
+var arr2 = [7,32,2,1,5]
 print("初始化数组")
 print(arr2)
 quicklySort(&arr2, low: 0, high: arr2.count - 1)
