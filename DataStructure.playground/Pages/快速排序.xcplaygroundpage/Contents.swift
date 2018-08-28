@@ -58,7 +58,7 @@ func quicklySort<T: Comparable>(_ contents:inout [T], low: Int, high: Int) {
         }
         if i <= j  {
            contents.swapAt(i, j)
-            print("contenti-->\(contents[i])" +  "和" +  " contentj-->\(contents[j])" + "交换")
+          print("contenti-->\(contents[i])" +  "和" +  " contentj-->\(contents[j])" + "交换")
             /*
                 交换完成后 i 向下一步
                 j 向前一步
