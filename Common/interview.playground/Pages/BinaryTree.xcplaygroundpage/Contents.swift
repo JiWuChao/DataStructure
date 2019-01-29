@@ -1,56 +1,9 @@
-//: [Previous](@previous)
 
-public struct Queue<T> {
-    fileprivate var queueData = [T]()
-    
-    public var count:Int {
-        return queueData.count
-    }
-    
-    public var isEmpty : Bool {
-        return queueData.isEmpty
-    }
-    
-    public mutating func enqueue(elment:T) {
-        queueData.append(elment)
-    }
-    
-    public mutating func enqueueAll(elments:[T]) {
-        for element in elments {
-            queueData.append(element)
-        }
-    }
-    
-    
-    
-    public mutating func dequeue() ->T? {
-        if !isEmpty {
-           return queueData.remove(at: 0)
-        }
-        return nil
-    }
-    
-    public var font:T {
-        return queueData.first!
-    }
-    
-}
-
-extension Queue:CustomStringConvertible {
-    public var description: String {
-        var s = "["
-        for (index,value) in queueData.enumerated() {
-            s += "\(value)"
-            if index != count - 1 {
-                s += ","
-            }
-        }
-        return s + "]"
-    }
-    
-    
-}
-
+/*
+    1. 二叉树的深度 (递归，非递归)
+    2. 翻转二叉树 (递归)
+    3. 判断二叉树是否为平衡二叉树 https://blog.csdn.net/K346K346/article/details/51085501
+ */
 
 public class TreeNode<T> {
     public var val: T
@@ -116,13 +69,13 @@ public class TreeNode<T> {
         }
         
         while queue.count > 0 {
-            print("&&&&&&&&&&&")
-            print("count : " + "\(queue.count)")
+//            print("&&&&&&&&&&&")
+//            print("count : " + "\(queue.count)")
             let size = queue.count
-            for val in queue {
-                print(val.val)
-            }
-            print("*********")
+//            for val in queue {
+//                print(val.val)
+//            }
+//            print("*********")
             var level = [T]()
             
             for _ in 0 ..< size {
@@ -143,6 +96,80 @@ public class TreeNode<T> {
     }
     
     
+     /// 翻转二叉树
+     ///
+     /// - Parameter root: <#root description#>
+     /// - Returns: <#return value description#>
+     public func invertTree(root:TreeNode<T>?) ->TreeNode<T>? {
+        guard let rot = root else { return nil}
+        rot.left = invertTree(root: rot.left)
+        rot.right = invertTree(root: rot.right)
+        print("before -- > rot.left :" + "\(String(describing: rot.left?.val))" + " " + "rot.right :" + "\(String(describing: rot.right?.val))" )
+        let temp = rot.left
+            rot.left = rot.right
+            rot.right = temp
+        
+        print("after -- > rot.left :" + "\(String(describing: rot.left?.val))" + " " + "rot.right :" + "\(String(describing: rot.right?.val))" )
+        return rot
+    }
+    
+    
+    /// 平衡二叉树
+    
+    /// 解法一
+    
+    /// 思路 ：根据二叉树的定义，我们可以递归遍历二叉树的每一个节点来，求出每个节点的左右子树的高度，如果每个节点的左右子树的高度相差不超过1，按照定义，它就是一颗平衡二叉树。
+    
+    /// 优点: 只要求出给定二叉树的高度，就可以方便的判断出二叉树是平衡二叉树，思路简单，代码简洁
+    /// 缺点：由于每个节点都会被重复遍历多次，这造成时间效率不高。
+    /// - Parameter node: <#node description#>
+    /// - Returns: <#return value description#>
+    public func isBalancedTree(node:TreeNode<T>?) -> Bool {
+        guard let root = node else { return true }
+        
+        let leftDe = maxDepthNonRecursion(root: root.left)
+        
+        let rightDe = maxDepthNonRecursion(root: root.right)
+        
+        let diff = leftDe - rightDe
+       // print("diff " + "\(diff)")
+        if diff > 1 || diff < -1 {
+            return false
+        }
+        return isBalancedTree(node: root.right) && isBalancedTree(node: root.left)
+    }
+    
+    
+    
+    /// 平衡二叉树 解法二
+    /// 思路: 在判断左右子树是否平衡的过程中把深度计算出来，这样在对父结点进行平衡判断时就可以不用再重复计算左右子树的深度了
+    /// - Parameter node: <#node description#>
+    /// - Returns: <#return value description#>
+    public func isBalancedTree2(node:TreeNode<T>?) -> Bool {
+        var depth = 0
+        
+        return isBalancedTreeOnce(rootNode: node, depth: &depth)
+    }
+
+    func isBalancedTreeOnce(rootNode:TreeNode?,depth:inout Int) -> Bool {
+        guard let root = rootNode else {
+            depth = 0
+            return true
+        }
+        var leftDepth:Int = 0
+        var rightDepth:Int = 0
+        if isBalancedTreeOnce(rootNode: root.left, depth: &leftDepth) && isBalancedTreeOnce(rootNode: root.right, depth: &rightDepth) {
+            
+            let diff:Int = leftDepth - rightDepth
+            
+            if diff <= 1 && diff >= -1 {
+                
+                depth = leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1
+                return true
+            }
+        }
+        return false
+    }
     
     
 }
@@ -161,8 +188,25 @@ let node2 = TreeNode.init(left: node4 , value: 2, right: node5)
 
 let node1 = TreeNode.init(left: node2, value: 1, right: node3)
 
-
+// 二叉树的深度 递归
 print(node1.maxDepth(root: node1))
 
-
+// 二叉树的深度 非递归
 print(node1.maxDepthNonRecursion(root: node1))
+
+print("翻转前")
+print(node1.levelOrder(root: node1))
+// 翻转二叉树
+node1.invertTree(root: node1)
+
+print("翻转后")
+
+print(node1.levelOrder(root: node1))
+
+// 平衡二叉树 一
+print(node1.isBalancedTree(node: node1))
+
+
+// 平衡二叉树 二
+
+print(node1.isBalancedTree2(node: node1))
