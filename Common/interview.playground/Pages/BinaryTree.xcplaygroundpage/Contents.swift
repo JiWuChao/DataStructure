@@ -2,7 +2,7 @@
 /*
     1. 二叉树的深度 (递归，非递归)
     2. 翻转二叉树 (递归)
-    3. 判断二叉树是否为平衡二叉树 https://blog.csdn.net/K346K346/article/details/51085501
+    3. 判断二叉树是否为平衡二叉树(两种) https://blog.csdn.net/K346K346/article/details/51085501
  */
 
 public class TreeNode<T> {
