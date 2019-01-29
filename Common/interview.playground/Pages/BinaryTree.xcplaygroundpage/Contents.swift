@@ -85,11 +85,9 @@ public class TreeNode<T> {
         guard let ro = root else {
             return 0
         }
-//        print("根节点是:" + "\(ro.val)")
+
         let left = maxDepth(root: ro.left)
-//        print("left :" + "\(left)")
         let right = maxDepth(root: ro.right)
-//        print("right :" + "\(right)")
         print("max:" + "\(max(left, right) + 1)" + " " + "root:" + "\(ro.val)")
         return max(left, right) + 1
         
