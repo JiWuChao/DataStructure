@@ -92,8 +92,7 @@ extension BinaryTree {
             process(value)
         }
     }
-   
-
+  
 }
 
 /*
@@ -144,5 +143,9 @@ node1.traverseLRD { (value) in
     print(s3)
 }
 print("\n\n\n")
+
+
+
+
 
 

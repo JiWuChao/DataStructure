@@ -22,5 +22,6 @@
         <page name='15二分查找'/>
         <page name='折半插入排序'/>
         <page name='希尔排序'/>
+        <page name='二叉树的深度'/>
     </pages>
 </playground>
