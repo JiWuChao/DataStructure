@@ -3,5 +3,6 @@
     <pages>
         <page name='BinaryTree'/>
         <page name='String'/>
+        <page name='ConverIPV4ToInt'/>
     </pages>
 </playground>
