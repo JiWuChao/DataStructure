@@ -75,23 +75,29 @@ public final class SingleLinkList<T> {
         return nil
     }
     
-    //找到在 index 之前的 node
+    /// 找到在 index 之前的 node
+    ///
+    ///
+    ///
+    
     func getBeforeNode(atIndex index:Int) -> Node? {
-        
+        //1 先把index - 1 主要判断要找的是不是越界了
         let tempIndex = index - 1
         
-        if tempIndex >= 0 {
+        if tempIndex >= 0 {//3 找的不是head节点
             var node = head
             var i = tempIndex
-            while node != nil {
-                if i == 0 {
+            while node != nil { // 4 head 节点为空 则证明链表为空 返回第2步
+                if i == 0 { // 5 如果 第一次循环时就 i==0 则返回head节点 否则就是从index 的前一个节点 即 index-1
                     return node
                 }
+                // 6 下面这两步 表示从 头结点开始找 查找index-1次
+                // index 是递减的
                 i -= 1
                 node = node?.next
             }
         }
-        return nil
+        return nil //2 寻找的节点越界了
     }
 
     
@@ -117,10 +123,11 @@ public final class SingleLinkList<T> {
     //5 链表的插入 插入在第 index 结点
     
     public func insertNode(atIndex index:Int,value:T) {
+        /// 如果在第四个位置中插入 则先找到第三个位置的节点
         let oldNode = getBeforeNode(atIndex: index)
         let newNode = SLNode(value: value)
         if index > 0 {
-            if let old = oldNode {
+            if let old = oldNode {// 如果原位置的节点不为空 则插入员
                 newNode.next = old.next
                 old.next = newNode
             } else {
